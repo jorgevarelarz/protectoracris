@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Casa de acogida">
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <h1 class="text-4xl font-bold text-center mb-6 text-indigo-800">Ser casa de acogida</h1>
+        <p class="text-center text-gray-600 max-w-2xl mx-auto">
+            Abrir tu casa por un tiempo cambia una vida para siempre. No pagas veterinario
+            y a veces ni la comida: solo pedimos cuidado, tiempo y mucho carino.
+        </p>
+
+        <div class="mt-10 grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h2 class="text-xl font-bold mb-2">Que incluye</h2>
+                <ul class="text-gray-600 space-y-2">
+                    <li>• Acompanamiento y seguimiento constante.</li>
+                    <li>• Veterinario y tratamientos cubiertos por la protectora.</li>
+                    <li>• Material basico si lo necesitas.</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <h2 class="text-xl font-bold mb-2">Que esperamos</h2>
+                <ul class="text-gray-600 space-y-2">
+                    <li>• Espacio seguro para los primeros dias.</li>
+                    <li>• Tiempo para paseo y cuidados basicos.</li>
+                    <li>• Informarnos de cualquier cambio importante.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-10 bg-gray-50 p-8 rounded-2xl border border-gray-200">
+            <h3 class="text-2xl font-bold mb-4">Formulario de acogida</h3>
+            <p class="text-gray-600 mb-4">
+                Para empezar necesitamos algunos datos. Por ejemplo:
+                si puedes aislar al animal los primeros dias y si convive con otros animales.
+            </p>
+            <a href="https://tally.so/r/tu-formulario" target="_blank" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-indigo-700 transition-colors inline-block">
+                Rellenar formulario de acogida
+            </a>
+        </div>
+    </main>
+</Layout>

@@ -74,7 +74,13 @@ if (!animal) return Astro.redirect('/404');
             </div>
           </div>
 
-          <div class="mt-10 pt-6 border-t border-gray-100">
+          <div class="mt-10 pt-6 border-t border-gray-100 space-y-3">
+             <a 
+                href="/adopciones"
+                class="flex items-center justify-center w-full bg-gray-900 text-white font-bold py-3 rounded-xl hover:bg-indigo-600 transition-colors"
+             >
+                Como adoptar
+             </a>
              <a 
                 href={`https://wa.me/34600000000?text=Hola,%20me%20interesa%20adoptar%20a%20${animal.nombre}`}
                 target="_blank"

@@ -17,18 +17,50 @@ const query = `*[_type == "animal"] | order(_createdAt desc) {
 const animales = await client.fetch(query);
 ---
 
-<Layout title="Adopta un amigo">
+<Layout title="Protectora Cris">
 
-  <header class="bg-white shadow-sm py-6">
-    <div class="max-w-6xl mx-auto px-4">
-      <h1 class="text-3xl font-bold text-indigo-700">Refugio Esperanza</h1>
-      <p class="text-gray-500">Salvando vidas, completando familias</p>
+  <section class="relative bg-gray-900 text-white">
+    <div class="absolute inset-0">
+      <img 
+        src="/perro-feliz.jpg" 
+        alt="Perro feliz" 
+        class="w-full h-full object-cover opacity-40"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
     </div>
-  </header>
+
+    <div class="relative max-w-6xl mx-auto px-4 py-24 sm:py-32 flex flex-col items-center text-center">
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+        No compres, <span class="text-indigo-400">adopta</span> un amigo fiel
+      </h1>
+      
+      <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">
+        En Protectora Cris rescatamos, curamos y buscamos segundas oportunidades. 
+        Tu ayuda transforma vidas, una huella a la vez.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+        <a href="#animales" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105 shadow-lg flex items-center justify-center gap-2">
+          🐶 Ver animales en adopcion
+        </a>
+
+        <div class="flex gap-4">
+          <a href="/acogida" class="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 px-6 py-4 rounded-full font-semibold transition-colors text-center">
+            🏠 Ser Casa de Acogida
+          </a>
+          <a href="/donaciones" class="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 px-6 py-4 rounded-full font-semibold transition-colors text-center">
+            ❤️ Donar
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <main class="max-w-6xl mx-auto px-4 py-10">
     
-    <h2 class="text-2xl font-bold mb-6">Nuestros peludos en adopción</h2>
+    <div id="animales" class="scroll-mt-24">
+      <h2 class="text-2xl font-bold mb-6">Nuestros peludos en adopcion</h2>
+    </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       

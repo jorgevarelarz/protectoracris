@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Proceso de Adopcion">
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-indigo-800 mb-4">Adopta, no compres</h1>
+            <p class="text-lg text-gray-600">Sigue estos pasos para dar un hogar a uno de nuestros protegidos.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+                <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
+                <h3 class="font-bold text-gray-900 mb-2">Cuestionario</h3>
+                <p class="text-sm text-gray-500">Rellena el formulario de abajo para que conozcamos tu estilo de vida.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+                <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
+                <h3 class="font-bold text-gray-900 mb-2">Entrevista</h3>
+                <p class="text-sm text-gray-500">Hablaremos por telefono o visitaremos tu hogar para asegurar el bienestar del animal.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+                <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
+                <h3 class="font-bold text-gray-900 mb-2">Adopcion</h3>
+                <p class="text-sm text-gray-500">Firmamos el contrato, cambio de chip y a casa.</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden" id="formulario">
+            
+            <iframe 
+                data-tally-src="https://tally.so/embed/81LjVY?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
+                loading="lazy" 
+                width="100%" 
+                height="500" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0" 
+                title="Cuestionario de Adopcion">
+            </iframe>
+
+            <script>
+                // @ts-ignore
+                var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
+            </script>
+        </div>
+
+    </main>
+</Layout>
