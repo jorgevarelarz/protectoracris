@@ -1,0 +1,37 @@
+---
+// src/components/Footer.astro
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-gray-900 text-gray-300 py-12 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-center md:text-left">
+        
+        <div>
+            <h3 class="text-white text-lg font-bold mb-4">Refugio Esperanza</h3>
+            <p class="text-sm leading-relaxed">
+                Rescatamos animales de la calle, curamos sus heridas y les buscamos el hogar que merecen.
+            </p>
+        </div>
+
+        <div>
+            <h3 class="text-white text-lg font-bold mb-4">Contacto</h3>
+            <ul class="space-y-2 text-sm">
+                <li>📍 Barcelona, España</li>
+                <li>📧 adopciones@ejemplo.com</li>
+                <li>📱 +34 600 000 000</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3 class="text-white text-lg font-bold mb-4">Síguenos</h3>
+            <div class="flex justify-center md:justify-start gap-4">
+                <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                <a href="#" class="hover:text-white transition-colors">Facebook</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-gray-800 mt-10 pt-6 text-center text-xs text-gray-500">
+        &copy; {year} Refugio Esperanza. Web creada con ❤️.
+    </div>
+</footer>
