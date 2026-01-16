@@ -22,27 +22,6 @@ const animales = await client.fetch(query);
 
 <Layout title="Los Peludos de Cris">
 
-  <head slot="head">
-    <script>
-      (function () {
-        if (typeof navigator === 'undefined') return;
-        var langs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
-        var lang = '';
-        for (var i = 0; i < langs.length; i++) {
-          var base = String(langs[i]).toLowerCase().split('-')[0];
-          if (base === 'en' || base === 'fr') {
-            lang = base;
-            break;
-          }
-        }
-        if (!lang) return;
-        if (window.location.pathname === '/') {
-          window.location.replace('/' + lang);
-        }
-      })();
-    </script>
-  </head>
-
   <section class="relative bg-gray-900 text-white">
     <div class="absolute inset-0">
       <img 

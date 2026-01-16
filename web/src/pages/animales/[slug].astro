@@ -47,7 +47,7 @@ const porcentaje =
         <div class="md:w-1/2 bg-gray-200">
            {animal.imagen && (
             <img 
-              src={urlFor(animal.imagen).width(800).height(1000).url()} 
+              src={urlFor(animal.imagen).width(800).fit('max').url()} 
               alt={animal.nombre} 
               class="w-full h-full object-cover min-h-[400px]"
             />
