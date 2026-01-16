@@ -1,10 +1,7 @@
 ---
-// --- PARTE DE SERVIDOR (Se ejecuta al construir la página) ---
-import { client, urlFor } from '../lib/sanity';
-import Layout from '../layouts/Layout.astro';
+import { client, urlFor } from '../../lib/sanity';
+import Layout from '../../layouts/LayoutEn.astro';
 
-// 1. Definimos la consulta (GROQ) para pedir los datos
-// Pedimos: nombre, estado, la foto y el slug (url)
 const query = `*[_type == "animal"] | order(_createdAt desc) {
   nombre,
   estado,
@@ -16,38 +13,29 @@ const query = `*[_type == "animal"] | order(_createdAt desc) {
   }
 }`;
 
-// 2. Ejecutamos la consulta
 const animales = await client.fetch(query);
+
+const statusLabels = {
+  urgente: 'urgent',
+  reservado: 'reserved',
+  adoptado: 'adopted',
+  adopcion: 'for adoption',
+};
+
+const speciesLabels = {
+  perro: 'dog',
+  gato: 'cat',
+  otro: 'other',
+};
 ---
 
 <Layout title="Los Peludos de Cris">
-
-  <head slot="head">
-    <script>
-      (function () {
-        if (typeof navigator === 'undefined') return;
-        var langs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
-        var lang = '';
-        for (var i = 0; i < langs.length; i++) {
-          var base = String(langs[i]).toLowerCase().split('-')[0];
-          if (base === 'en' || base === 'fr') {
-            lang = base;
-            break;
-          }
-        }
-        if (!lang) return;
-        if (window.location.pathname === '/') {
-          window.location.replace('/' + lang);
-        }
-      })();
-    </script>
-  </head>
 
   <section class="relative bg-gray-900 text-white">
     <div class="absolute inset-0">
       <img 
         src="/perro-feliz.jpg" 
-        alt="Perro feliz" 
+        alt="Happy dog" 
         class="w-full h-full object-cover opacity-40"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
@@ -55,25 +43,25 @@ const animales = await client.fetch(query);
 
     <div class="relative max-w-6xl mx-auto px-4 py-24 sm:py-32 flex flex-col items-center text-center">
       <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-        No compres, <span class="text-indigo-400">adopta</span> un amigo fiel
+        Don't buy, <span class="text-indigo-400">adopt</span> a loyal friend
       </h1>
       
       <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">
-        En Los Peludos de Cris rescatamos, curamos y buscamos segundas oportunidades. 
-        Tu ayuda transforma vidas, una huella a la vez.
+        At Los Peludos de Cris we rescue, heal, and give second chances.
+        Your help transforms lives, one paw at a time.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-        <a href="#animales" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105 shadow-lg flex items-center justify-center gap-2">
-          🐶 Ver animales en adopcion
+        <a href="#animals" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105 shadow-lg flex items-center justify-center gap-2">
+          🐶 View animals for adoption
         </a>
 
         <div class="flex gap-4">
-          <a href="/acogida" class="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 px-6 py-4 rounded-full font-semibold transition-colors text-center">
-            🏠 Ser Casa de Acogida
+          <a href="/en/foster" class="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 px-6 py-4 rounded-full font-semibold transition-colors text-center">
+            🏠 Become a foster home
           </a>
-          <a href="/donaciones" class="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 px-6 py-4 rounded-full font-semibold transition-colors text-center">
-            ❤️ Donar
+          <a href="/en/donations" class="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 px-6 py-4 rounded-full font-semibold transition-colors text-center">
+            ❤️ Donate
           </a>
         </div>
       </div>
@@ -82,8 +70,8 @@ const animales = await client.fetch(query);
 
   <main class="max-w-6xl mx-auto px-4 py-10">
     
-    <div id="animales" class="scroll-mt-24">
-      <h2 class="text-2xl font-bold mb-6">Nuestros peludos en adopcion</h2>
+    <div id="animals" class="scroll-mt-24">
+      <h2 class="text-2xl font-bold mb-6">Our pets looking for a home</h2>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -105,12 +93,12 @@ const animales = await client.fetch(query);
                   animal.estado === 'reservado' ? 'bg-yellow-500' : 
                   animal.estado === 'adoptado' ? 'bg-green-500' : 'bg-indigo-600'
                 }`}>
-                {animal.estado}
+                {statusLabels[animal.estado] ?? animal.estado}
               </span>
 
               {animal.causa && (
                 <span class="bg-white text-indigo-600 border border-indigo-100 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-sm flex items-center gap-1 animate-pulse">
-                  🚑 Tratamiento
+                  🚑 Medical care
                 </span>
               )}
             </div>
@@ -119,11 +107,11 @@ const animales = await client.fetch(query);
           <div class="p-6">
             <div class="flex justify-between items-baseline">
               <h3 class="text-2xl font-bold text-gray-900">{animal.nombre}</h3>
-              <span class="text-sm text-gray-500 capitalize">{animal.especie}</span>
+              <span class="text-sm text-gray-500 capitalize">{speciesLabels[animal.especie] ?? animal.especie}</span>
             </div>
             
-            <a href={`/animales/${animal.slug}`} class="mt-4 block w-full text-center bg-gray-900 text-white font-medium py-2 rounded-lg hover:bg-indigo-600 transition-colors">
-              Conoceme mejor
+            <a href={`/en/animals/${animal.slug}`} class="mt-4 block w-full text-center bg-gray-900 text-white font-medium py-2 rounded-lg hover:bg-indigo-600 transition-colors">
+              Meet me
             </a>
           </div>
 
@@ -133,7 +121,7 @@ const animales = await client.fetch(query);
     </div>
 
     {animales.length === 0 && (
-      <p class="text-center text-gray-500 py-10">No se han encontrado animales en este momento (o revisa si has publicado el contenido en Sanity).</p>
+      <p class="text-center text-gray-500 py-10">No animals found at the moment (or make sure you have published content in Sanity).</p>
     )}
 
   </main>
