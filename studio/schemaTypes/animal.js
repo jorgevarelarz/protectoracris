@@ -84,5 +84,39 @@ export default {
       title: 'Información Veterinaria (Vacunas, esterilización...)',
       type: 'string',
     },
+    {
+      name: 'causa',
+      title: 'Recaudación para Tratamiento (Opcional)',
+      description:
+        'Rellena esto solo si el animal necesita una operación o tratamiento costoso.',
+      type: 'object',
+      fields: [
+        {
+          name: 'titulo',
+          title: 'Título del tratamiento',
+          type: 'string',
+          placeholder: 'Ej: Operación de cadera',
+        },
+        {
+          name: 'costeTotal',
+          title: 'Coste Total (€)',
+          type: 'number',
+        },
+        {
+          name: 'recaudado',
+          title: 'Dinero Recaudado (€)',
+          type: 'number',
+          initialValue: 0,
+          description:
+            'Irás actualizando esto manualmente conforme lleguen donaciones.',
+        },
+        {
+          name: 'urgencia',
+          title: '¿Es muy urgente?',
+          type: 'boolean',
+          initialValue: false,
+        },
+      ],
+    },
   ],
 }
