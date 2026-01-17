@@ -61,6 +61,31 @@ const sexLabels = {
   
     <head slot="head">
         <meta property="og:image" content={urlFor(animal.imagen).width(800).url()} />
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            name: animal.nombre,
+            image: urlFor(animal.imagen).width(800).url(),
+            description: animal.descripcion,
+            brand: {
+              "@type": "Organization",
+              name: "Los Peludos de Cris",
+            },
+            offers: {
+              "@type": "Offer",
+              url: Astro.url.href,
+              priceCurrency: "EUR",
+              price: "0",
+              availability:
+                animal.estado === "adoptado"
+                  ? "https://schema.org/OutOfStock"
+                  : "https://schema.org/InStock",
+              category: animal.especie,
+            },
+          })}
+        />
     </head>
 
     <nav class="p-4 max-w-4xl mx-auto">

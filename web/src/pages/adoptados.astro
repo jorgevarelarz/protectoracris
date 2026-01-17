@@ -1,0 +1,49 @@
+---
+import { client, urlFor } from '../lib/sanity';
+import Layout from '../layouts/Layout.astro';
+
+const query = `*[_type == "animal" && estado == "adoptado"] | order(_createdAt desc) {
+  nombre,
+  estado,
+  especie,
+  imagen,
+  "slug": slug.current
+}`;
+const adoptados = await client.fetch(query);
+---
+
+<Layout title="Finales Felices - Los Peludos de Cris">
+  <section class="bg-indigo-900 text-white py-20 text-center">
+    <h1 class="text-4xl font-bold mb-4">Finales Felices 🏡</h1>
+    <p class="text-xl opacity-90">Ellos ya encontraron su hogar. ¡Gracias por hacerlo posible!</p>
+  </section>
+
+  <main class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {adoptados.map((animal) => (
+        <div class="bg-white rounded-xl shadow-md overflow-hidden opacity-90 hover:opacity-100 transition-opacity">
+          <div class="h-64 w-full bg-gray-200 relative grayscale hover:grayscale-0 transition-all duration-500">
+             {animal.imagen && (
+                <img 
+                  src={urlFor(animal.imagen).width(500).fit('max').url()} 
+                  alt={animal.nombre}
+                  class="w-full h-full object-cover"
+                />
+              )}
+             <div class="absolute bottom-3 right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
+                ¡Adoptado!
+             </div>
+          </div>
+          <div class="p-4 text-center">
+            <h3 class="text-xl font-bold text-gray-800">{animal.nombre}</h3>
+            <p class="text-sm text-gray-500">Disfrutando de su nueva vida</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    {adoptados.length === 0 && (
+        <p class="text-center text-gray-500 mt-10">Aún no hemos subido casos de éxito, ¡pero pronto llegarán!</p>
+    )}
+  </main>
+</Layout>

@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Navbar from '../components/NavbarEn.astro';
 import Footer from '../components/FooterEn.astro';
+import { Analytics } from '@vercel/analytics/react';
 
 interface Props {
 	title: string;
@@ -29,6 +30,7 @@ const { title } = Astro.props;
         </main>
 
         <Footer />
+        <Analytics client:load />
         
 	</body>
 </html>

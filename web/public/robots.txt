@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://protectoracris.vercel.app/sitemap-index.xml
