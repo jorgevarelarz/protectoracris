@@ -21,6 +21,26 @@ const animales = await client.fetch(query);
 ---
 
 <Layout title="Los Peludos de Cris">
+  <head slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "AnimalShelter",
+      name: "Los Peludos de Cris",
+      url: "https://protectoracris.vercel.app",
+      logo: "https://protectoracris.vercel.app/logo.jpg",
+      image: "https://protectoracris.vercel.app/perro-feliz.jpg",
+      description: "Protectora de animales dedicada al rescate y adopción de perros y gatos.",
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "ES",
+        addressLocality: "Barcelona"
+      },
+      telephone: "+34609983818",
+      sameAs: [
+        "https://www.facebook.com/cristinasfurbabies/?locale=es_ES"
+      ]
+    })} />
+  </head>
 
   <section class="relative bg-gray-900 text-white">
     <div class="absolute inset-0">
@@ -34,7 +54,8 @@ const animales = await client.fetch(query);
 
     <div class="relative max-w-6xl mx-auto px-4 py-24 sm:py-32 flex flex-col items-center text-center">
       <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-        No compres, <span class="text-indigo-400">adopta</span> un amigo fiel
+        <span class="block text-2xl md:text-3xl text-indigo-400 mb-2">Los Peludos de Cris</span>
+        No compres, adopta un amigo fiel
       </h1>
       
       <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10">
