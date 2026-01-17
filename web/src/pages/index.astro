@@ -65,10 +65,25 @@ const animales = await client.fetch(query);
       <h2 class="text-2xl font-bold mb-6">Nuestros peludos en adopcion</h2>
     </div>
 
+    <div class="flex justify-center gap-4 mb-8">
+      <button class="filter-btn active bg-gray-900 text-white px-6 py-2 rounded-full font-bold transition-all hover:scale-105" data-filter="todos">
+        Todos
+      </button>
+      <button class="filter-btn bg-white text-gray-600 border border-gray-200 px-6 py-2 rounded-full font-bold transition-all hover:scale-105 hover:border-indigo-500" data-filter="perro">
+        🐶 Perros
+      </button>
+      <button class="filter-btn bg-white text-gray-600 border border-gray-200 px-6 py-2 rounded-full font-bold transition-all hover:scale-105 hover:border-indigo-500" data-filter="gato">
+        🐱 Gatos
+      </button>
+    </div>
+
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       
       {animales.map((animal) => (
-        <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+        <article
+          class="animal-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+          data-especie={animal.especie}
+        >
           
           <div class="h-64 w-full bg-gray-200 relative group">
             {animal.imagen && (
@@ -116,5 +131,33 @@ const animales = await client.fetch(query);
     )}
 
   </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.animal-card');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach((b) => {
+          b.classList.remove('bg-gray-900', 'text-white');
+          b.classList.add('bg-white', 'text-gray-600');
+        });
+        btn.classList.remove('bg-white', 'text-gray-600');
+        btn.classList.add('bg-gray-900', 'text-white');
+
+        const filter = btn.getAttribute('data-filter');
+
+        cards.forEach((card) => {
+          if (filter === 'todos' || card.getAttribute('data-especie') === filter) {
+            card.classList.remove('hidden');
+            card.classList.add('block');
+          } else {
+            card.classList.add('hidden');
+            card.classList.remove('block');
+          }
+        });
+      });
+    });
+  </script>
 
 </Layout>
