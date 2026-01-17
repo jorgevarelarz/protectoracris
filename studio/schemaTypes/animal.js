@@ -116,6 +116,23 @@ export default {
           type: 'boolean',
           initialValue: false,
         },
+        {
+          name: 'documentos',
+          title: 'Facturas y Pruebas Médicas',
+          description: 'Sube aquí los PDFs de las facturas o fotos de las radiografías para dar transparencia.',
+          type: 'array',
+          of: [
+            { 
+              type: 'file', 
+              options: { accept: '.pdf' },
+              title: 'Documento PDF' 
+            }, 
+            { 
+              type: 'image',
+              title: 'Imagen (Foto factura/Radiografía)' 
+            }
+          ]
+        },
       ],
     },
   ],

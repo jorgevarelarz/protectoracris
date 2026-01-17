@@ -15,7 +15,14 @@ const query = `*[_type == "animal" && slug.current == $slug][0]{
     titulo,
     costeTotal,
     recaudado,
-    urgencia
+    urgencia,
+    documentos[] {
+      _type,
+      asset->{
+        url,
+        originalFilename
+      }
+    }
   }
 }`;
 const animal = await client.fetch(query, { slug });
@@ -62,12 +69,12 @@ const sexLabels = {
 
     <main class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden mb-12">
       <div class="md:flex">
-        <div class="md:w-1/2 bg-gray-200">
+        <div class="md:w-1/2 bg-gray-100 flex items-center justify-center p-4">
            {animal.imagen && (
             <img 
               src={urlFor(animal.imagen).width(800).fit('max').url()} 
               alt={animal.nombre} 
-              class="w-full h-full object-cover min-h-[400px]"
+              class="w-full h-auto object-contain max-h-[520px]"
             />
            )}
         </div>
@@ -123,6 +130,20 @@ const sexLabels = {
               <p class="text-sm text-gray-500 mb-4">
                 Pour guerir et etre adopte, ce traitement est necessaire.
               </p>
+              {animal.causa.documentos && animal.causa.documentos.length > 0 && (
+                <div class="mb-6 flex flex-wrap gap-2">
+                  {animal.causa.documentos.map((doc) => (
+                    <a
+                      href={doc.asset.url}
+                      target="_blank"
+                      class="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-300 rounded-md text-xs font-medium text-gray-700 hover:bg-gray-50 transition-colors shadow-sm"
+                    >
+                      {doc._type === 'file' ? '📄' : '📷'}
+                      <span>Voir {doc._type === 'file' ? 'Facture/Doc' : 'Preuve'}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
 
               <div class="w-full bg-gray-200 rounded-full h-4 mb-2 overflow-hidden">
                 <div
